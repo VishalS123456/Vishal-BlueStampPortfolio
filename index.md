@@ -43,15 +43,28 @@ For your second milestone, explain what you've worked on since your previous mil
 
 # First Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/U72xngeip3c?si=YS2BSfhBftbgAVuk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-For your first milestone, describe what your project is and how you plan to build it. You can include:
-- An explanation about the different components of your project and how they will all integrate together
-- Technical progress you've made so far
-- Challenges you're facing and solving in your future milestones
-- What your plan is to complete your project
+The main goal of the Ball Tracking Robot is to create a robot that can detect and follow a red-colored ball in real time. The main components of this project include:
+- Car Chassis + Motors: serves as the structure and movement system of the robot
+- Raspberry Pi: The "brain" of the robot which runs the code and later processes the camera input
+- H-Bridge: Sends power to all of the motors, allowing to control the direction that the robot moves
+- Camera: Captures video for ball tracking and detection
+- Breadboard + Jumper Wires: Breadboard and LED's mainly used for aesthetic but jumper wires to connect all of the parts to the Raspberry Pi
+
+How it Works:
+The camera captures frames continuously, being able to detect and track a red ball using Open CV. Once the position of the ball has been identified, the Raspberry Pi sends a signal to the motors to move. If the ball is centered, the robot will move slightly forward. If it is slightly off to the side(either left or right), the robot turns to that respective direction until the ball is re-centered. If the ball is not detected by the camera at all, it will simply spin until it detects the ball.
+
+Progress:
+- Successfully set up Raspberry Pi
+- Set up circuit with LED's
+- Wrote Python code for the circuit and the motors, enabling the LED's to blink at my own pace and enabling the motors to spin both forward and backward
+- Built car chassis
+- Sucessfully connected the H Bridge, Motors, Breadboard to the raspberry Pi
+
+Challenges:
+Throughout the process of reaching the first milestone, I faced several challenges. The first challenge that I faced was creating a circuit. Since I had never done it before, I kept wiring it incorrectly. Once I got that complete I moved on to making the car chassis where another issue popped up: one of the pieces was missing. As a result, I lost a lot of time because I couldn't test if the robot would respond to the motor commands properly without the car chassis. The last issue of the path to reaching the first milestone was building the car chassis itself. I had to wait a couple of days to recieve the new chassis but building the chassis was far more difficult. The spaces were super tight and it took a very long time in order to put the entire car chassis together.
+
 
 # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
