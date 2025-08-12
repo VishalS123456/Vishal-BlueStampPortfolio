@@ -33,13 +33,24 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6Bf7_-hM-nk?si=zCgov5mG5xRJdPSH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
-- Technical details of what you've accomplished and how they contribute to the final goal
-- What has been surprising about the project so far
-- Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone 
+Since my first milestone, I’ve expanded my project to include real-time object detection using the Raspberry Pi Camera and OpenCV. I wrote a program that allows the robot to detect and locate a red-colored object in its field of view, which is a key step toward enabling autonomous ball tracking and following.
+
+The code begins by initializing the Raspberry Pi Camera through the picamera2 library and setting it to capture images at 640×480 resolution in RGB format. Each incoming frame is converted from BGR to HSV color space, which is better for color filtering because hue, saturation, and brightness are handled separately. To capture the full range of red shades, I defined two hue ranges — one at the lower end of the hue spectrum (lower_red1 to upper_red1) and one at the higher end (lower_red2 to upper_red2).
+
+These two ranges are applied as binary masks using cv2.inRange, then combined into a single mask showing only pixels that match the target red color. I use cv2.findContours to locate distinct shapes in the mask and select the largest one (which should be the red ball). Using image moments (cv2.moments), the code calculates the contour’s centroid (cx, cy), which represents the ball’s position. I draw a green circle at this location in the original frame and save both the original and mask images for debugging purposes.
+
+One challenge I faced was fine-tuning the HSV thresholds for reliable detection. Lighting changes had a big impact — a small shift in brightness or shadow could cause false detections or complete misses. I overcame this by systematically testing in different lighting setups and adjusting the ranges for more tolerance.
+
+Another major challenge was with the robot’s motion control. At one stage, it kept turning right continuously without turning left. I discovered this was due to a motor control imbalance, where the left motor wasn’t receiving the correct signal. I fixed this by testing each motor independently, identifying the wiring/control issue, and rebalancing the movement logic so both motors respond evenly.
+
+Before my final milestone, I plan to:
+- Integrate ultrasonic sensors to help measure the distance to obstacles or the target ball.
+
+- Add distance tracking so the robot can adjust its speed and stop at a safe range from the object.
+
+- Implement shape tracking in addition to color detection, so the robot can better distinguish the ball from similarly colored backgrounds.
 
 # First Milestone
 
