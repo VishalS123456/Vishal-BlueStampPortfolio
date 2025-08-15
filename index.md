@@ -22,16 +22,18 @@ You should comment out all portions of your portfolio that you have not complete
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
-- A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE
+
+Since my second milestone, I have completed the full ball-tracking robot. I integrated the Raspberry Pi camera with motor controls so that the robot could follow a red ball in real time. The robot now detects the ball’s position using computer vision, calculates whether it’s centered or off to the side, and adjusts the motors proportionally to move forward or turn smoothly. I also implemented a stopping mechanism so the robot halts when it reaches the ball, preventing collisions. This milestone represents the first fully functional system combining vision and motion control.
+
+One major challenge was fine-tuning the HSV thresholds for the red ball under different lighting conditions. The robot would occasionally detect other red objects or lose track of the ball entirely. Another challenge was getting smooth motor control — initially, the robot would overshoot or only turn one direction. By testing each motor independently and implementing proportional turning, I overcame these issues. My biggest triumph was seeing the robot successfully follow the ball in real time — a physical system behaving exactly how I coded it. It was extremely satisfying after all the trial and error.
+
+Throughout this project, I gained experience in multiple areas of engineering. I learned how to use computer vision to process images and detect objects in real time, how to control motors using GPIO pins and the gpiozero library, and how to calibrate a camera to estimate distance from an object. I also improved my troubleshooting skills, learning to debug both hardware and software simultaneously, and how small adjustments can drastically improve performance.
+
+After everything I’ve learned at BSE, I hope to expand my skills in robotics even further. I want to explore adding ultrasonic sensors for obstacle detection, advanced shape recognition, and autonomous navigation. Beyond robotics, I’m want to apply these skills to other fields of engineering, such as aerospace where real-time sensing and control are critical. BSE has given me the foundation to tackle more complex, hands-on engineering projects in the future.
 
 
 
 # Second Milestone
-
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6Bf7_-hM-nk?si=zCgov5mG5xRJdPSH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
