@@ -17,9 +17,7 @@ You should comment out all portions of your portfolio that you have not complete
   
 # Final Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lhMH3puVH-s?si=5qKdQKWR6ZSVkvtA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Since my second milestone, I have completed the full ball-tracking robot. I integrated the Raspberry Pi camera with motor controls so that the robot could follow a red ball in real time. The robot now detects the ball’s position using computer vision, calculates whether it’s centered or off to the side, and adjusts the motors proportionally to move forward or turn smoothly. I also implemented a stopping mechanism so the robot halts when it reaches the ball, preventing collisions. This milestone represents the first fully functional system combining vision and motion control.
 
