@@ -85,17 +85,134 @@ Here's where you'll put images of your schematics. [Tinkercad](https://www.tinke
 # Code
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
-```c++
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  Serial.println("Hello World!");
-}
+```from picamera2 import Picamera2
+import cv2
+import numpy as np
+from gpiozero import Motor
+from time import sleep
 
-void loop() {
-  // put your main code here, to run repeatedly:
+# --------------------
+# Initialize camera
+# --------------------
+picam2 = Picamera2()
+picam2.configure(picam2.create_preview_configuration(
+    main={"format": "RGB888", "size": (640, 480)}
+))
+picam2.start()
+sleep(1)
 
-}
+# --------------------
+# Motors
+# --------------------
+motorA = Motor(forward=24, backward=25, pwm=True)
+motorB = Motor(forward=23, backward=18, pwm=True)
+
+# --------------------
+# Constants
+# --------------------
+r_ball = 4.25
+z_ball = 10
+frame_width = 640
+center_tolerance = 60   # pixels for small offsets
+stop_distance = 6       # inches
+max_forward_speed = 0.6
+max_turn_speed = 0.3    # reduced turn speed for smoother motion
+min_turn_speed = 0.1
+
+# --------------------
+# Image processing
+# --------------------
+def processimage(frame):
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    lower_red1 = np.array([0, 100, 100])
+    upper_red1 = np.array([10, 255, 255])
+    lower_red2 = np.array([160, 100, 100])
+    upper_red2 = np.array([179, 255, 255])
+
+    mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+    mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+    mask = cv2.bitwise_or(mask1, mask2)
+    mask = cv2.erode(mask, None, iterations=2)
+    mask = cv2.dilate(mask, None, iterations=2)
+
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if contours:
+        (x, y), radius = cv2.minEnclosingCircle(max(contours, key=cv2.contourArea))
+        return radius, x
+    return None, None
+
+# --------------------
+# Camera calibration
+# --------------------
+f_camera = None
+while f_camera is None:
+    image = picam2.capture_array()
+    r_image, x_ball = processimage(image)
+    if r_image:
+        f_camera = (z_ball * r_image) / r_ball
+        print(f"Camera calibrated: focal length = {f_camera:.2f}")
+    else:
+        print("Looking for ball to calibrate...")
+        motorA.forward(max_turn_speed)
+        motorB.backward(max_turn_speed)
+        sleep(0.1)
+
+motorA.stop()
+motorB.stop()
+sleep(0.1)
+
+# --------------------
+# Main loop
+# --------------------
+last_offset = 0  # Remember last seen direction
+
+while True:
+    frame = picam2.capture_array()
+    r_image, x_ball = processimage(frame)
+
+    if r_image:
+        z_current = (r_ball * f_camera) / r_image
+        center_x = frame_width / 2
+        offset = x_ball - center_x  # negative = left, positive = right
+        last_offset = offset  # update last known direction
+        print(f"Distance: {z_current:.2f} in, Offset: {offset:.2f}")
+
+        if z_current <= stop_distance:
+            motorA.stop()
+            motorB.stop()
+            print("Ball within 6 inches → stopped")
+        else:
+            # Proportional turning
+            if abs(offset) > center_tolerance:
+                turn_speed = max_turn_speed * (abs(offset) / center_x)
+                turn_speed = min(turn_speed, max_turn_speed)
+                turn_speed = max(turn_speed, min_turn_speed)  # ensure minimum turn speed
+                if offset < 0:  # ball is left
+                    motorA.backward(turn_speed)
+                    motorB.forward(turn_speed)
+                    print("Turning left")
+                    print(turn_speed)
+                else:  # ball is right
+                    motorA.forward(turn_speed)
+                    motorB.backward(turn_speed)
+                    print("Turning right")
+                    print(turn_speed)
+            else:
+                # Ball roughly centered → move forward
+                motorA.forward(max_forward_speed)
+                motorB.forward(max_forward_speed)
+                print("Moving forward")
+    else:
+        # Ball lost → spin toward last known direction
+        print("Ball lost → spinning to relocate")
+        if last_offset < 0:
+            motorA.backward(max_turn_speed)
+            motorB.forward(max_turn_speed)
+        else:
+            motorA.forward(max_turn_speed)                                                                                                                                                                                                          
+            motorB.backward(max_turn_speed)
+
+    sleep(0.1)
 ```
 
 # Bill of Materials
