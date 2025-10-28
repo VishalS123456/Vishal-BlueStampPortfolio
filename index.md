@@ -7,7 +7,7 @@ I built a ball-tracking robot that uses a Raspberry Pi camera and computer visio
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-| Vishal Sankaranarayanan | John P. Stevens<br> High School | Mechanical Engineering | Incoming Senior
+| Vishal Sankaranarayanan | John P. Stevens | Mechanical Engineering | Incoming Senior
 
 <!--**Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**-->
 
