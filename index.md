@@ -1,5 +1,5 @@
 # Ball Tracking Robot
-I built a ball-tracking robot that uses a Raspberry Pi camera and computer vision to detect, follow, and stop in front of a red ball. It processes live video to locate the ball’s position and distance, then adjusts its motors in real time to keep the ball centered and maintain the right following distance.
+I built a ball-tracking robot that uses a Raspberry Pi camera and computer vision to detect, follow, and stop in front of a red ball. It processes live video to locate the ball’s position and distance, then adjusts its motors in real time to keep the ball centered and maintain the correct following distance.
 
 You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
 ```HTML 
@@ -21,7 +21,7 @@ You should comment out all portions of your portfolio that you have not complete
 
 Since my second milestone, I have completed the full ball-tracking robot. I integrated the Raspberry Pi camera with motor controls so that the robot could follow a red ball in real time. The robot now detects the ball’s position using computer vision, calculates whether it’s centered or off to the side, and adjusts the motors proportionally to move forward or turn smoothly. I also implemented a stopping mechanism so the robot halts when it reaches the ball, preventing collisions. This milestone represents the first fully functional system combining vision and motion control.
 
-One major challenge was fine-tuning the HSV thresholds for the red ball under different lighting conditions. The robot would occasionally detect other red objects or lose track of the ball entirely. Another challenge was getting smooth motor control — initially, the robot would overshoot or only turn one direction. By testing each motor independently and implementing proportional turning, I overcame these issues. My biggest triumph was seeing the robot successfully follow the ball in real time. It was extremely satisfying after all the trial and error.
+One major challenge was fine-tuning the HSV thresholds for the red ball under different lighting conditions. The robot would occasionally detect other red objects or lose track of the ball entirely. Another challenge was achieving smooth motor control. Initially, the robot would overshoot or only turn in one direction. By testing each motor independently and implementing proportional turning, I overcame these issues. My biggest challenge was seeing the robot successfully follow the ball in real time. It was extremely satisfying after all the trial and error.
 
 Throughout this project, I gained experience in multiple areas of engineering. I learned how to use computer vision to process images and detect objects in real time, how to control motors using GPIO pins and the gpiozero library, and how to calibrate a camera to estimate distance from an object. I also improved my troubleshooting skills, learning to debug both hardware and software simultaneously, and how small adjustments can drastically improve performance.
 
@@ -39,12 +39,12 @@ The code begins by initializing the Raspberry Pi Camera through the picamera2 li
 
 These two ranges are applied as binary masks using cv2.inRange, then combined into a single mask showing only pixels that match the target red color. I use cv2.findContours to locate distinct shapes in the mask and select the largest one (which should be the red ball). Using image moments (cv2.moments), the code calculates the contour’s centroid (cx, cy), which represents the ball’s position. I draw a green circle at this location in the original frame and save both the original and mask images for debugging purposes.
 
-One challenge I faced was fine-tuning the HSV thresholds for reliable detection. Lighting changes had a big impact — a small shift in brightness or shadow could cause false detections or complete misses. I overcame this by systematically testing in different lighting setups and adjusting the ranges for more tolerance.
+One challenge I faced was fine-tuning the HSV thresholds for reliable detection. Lighting changes had a big impact. A small shift in brightness or shadow could cause false detections or complete misses. I overcame this by systematically testing in different lighting setups and adjusting the ranges for more tolerance.
 
-Another major challenge was with the robot’s motion control. At one stage, it kept turning right continuously without turning left. I discovered this was due to a motor control imbalance, where the left motor wasn’t receiving the correct signal. I fixed this by testing each motor independently, identifying the wiring/control issue, and rebalancing the movement logic so both motors respond evenly.
+Another major challenge was with the robot’s motion control. At one stage, it kept turning right continuously without turning left. I discovered this was due to a motor control imbalance, where the left motor wasn’t receiving the correct signal. I fixed this by testing each motor independently, identifying the wiring and control issue, and rebalancing the movement logic so both motors respond evenly.
 
 Before my final milestone, I plan to:
-- Integrate ultrasonic sensors to help measure the distance to obstacles or the target ball.
+- Integrate ultrasonic sensors to measure the distance to obstacles or the target ball.
 
 - Add distance tracking so the robot can adjust its speed and stop at a safe range from the object.
 
@@ -55,11 +55,11 @@ Before my final milestone, I plan to:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/U72xngeip3c?si=YS2BSfhBftbgAVuk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 The main goal of the Ball Tracking Robot is to create a robot that can detect and follow a red-colored ball in real time. The main components of this project include:
-- Car Chassis + Motors: serves as the structure and movement system of the robot
-- Raspberry Pi: The "brain" of the robot which runs the code and later processes the camera input
-- H-Bridge: Sends power to all of the motors, allowing to control the direction that the robot moves
-- Camera: Captures video for ball tracking and detection
-- Breadboard + Jumper Wires: Breadboard and LED's mainly used for aesthetic but jumper wires to connect all of the parts to the Raspberry Pi
+- Car Chassis + Motors: Serve as the structure and movement system of the robot.
+- Raspberry Pi: Acts as the "brain" of the robot, running the code and processing the camera input.
+- H-Bridge: Supplies power to all of the motors, allowing control over the robot's direction.
+- Camera: Captures live video for ball detection and tracking 
+- Breadboard and Jumper Wires: Breadboard and LED's are mainly used for aesthetics, and jumper wires to connect all of the parts to the Raspberry Pi
 
 How it Works:
 The camera captures frames continuously, being able to detect and track a red ball using Open CV. Once the position of the ball has been identified, the Raspberry Pi sends a signal to the motors to move. If the ball is centered, the robot will move slightly forward. If it is slightly off to the side(either left or right), the robot turns to that respective direction until the ball is re-centered. If the ball is not detected by the camera at all, it will simply spin until it detects the ball.
@@ -69,10 +69,10 @@ Progress:
 - Set up circuit with LED's
 - Wrote Python code for the circuit and the motors, enabling the LED's to blink at my own pace and enabling the motors to spin both forward and backward
 - Built car chassis
-- Sucessfully connected the H Bridge, Motors, Breadboard to the raspberry Pi
+- Sucessfully connected the H Bridge, motors, breadboard to the Raspberry Pi
 
 Challenges:
-Throughout the process of reaching the first milestone, I faced several challenges. The first challenge that I faced was creating a circuit. Since I had never done it before, I kept wiring it incorrectly. Once I got that complete I moved on to making the car chassis where another issue popped up: one of the pieces was missing. As a result, I lost a lot of time because I couldn't test if the robot would respond to the motor commands properly without the car chassis. The last issue of the path to reaching the first milestone was building the car chassis itself. I had to wait a couple of days to recieve the new chassis but building the chassis was far more difficult. The spaces were super tight and it took a very long time in order to put the entire car chassis together.
+Throughout the process of reaching the first milestone, I faced several challenges. The first challenge that I faced was creating the circuit. Since I had never done it before, I often wired it incorrectly. Once I got that complete I moved on to assembling the car chassis where another issue popped up. One of the pieces was missing. As a result, I lost valuable time because I couldn't test whether the robot would respond to the motor commands properly without the car chassis. The final challenge was building the new car chassis after receiving the replacement part. The assemly process was difficult because the spaces were very tight and it took a long time to put the entire car chassis together.
 
 
 # Schematics 
