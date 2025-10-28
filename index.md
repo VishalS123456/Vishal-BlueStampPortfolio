@@ -1,11 +1,9 @@
 # Ball Tracking Robot
 I built a ball-tracking robot that uses a Raspberry Pi camera and computer vision to detect, follow, and stop in front of a red ball. It processes live video to locate the ball’s position and distance, then adjusts its motors in real time to keep the ball centered and maintain the correct following distance.
 
-<!--You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
-```HTML 
+<!--You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:-->
 <!--- This is an HTML comment in Markdown -->
 <!--- Anything between these symbols will not render on the published site -->
-```-->
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
