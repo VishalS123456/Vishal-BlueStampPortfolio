@@ -5,7 +5,7 @@ I built a ball-tracking robot that uses a Raspberry Pi camera and computer visio
 <!--- This is an HTML comment in Markdown -->
 <!--- Anything between these symbols will not render on the published site -->
 
-| **Engineer** | **School** | **Area of Interest** | **Grade** |
+| **Engineer** | **High School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
 | Vishal Sankaranarayanan | John P. Stevens | Mechanical Engineering | Incoming Senior
 
